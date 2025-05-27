@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "private": true,
   "scripts": {
+    "dev:server": "pnpm --filter koa-server run dev",
+    "dev:client": "pnpm --filter react-fe run dev",
+    "dev": "pnpm run dev:server & pnpm run dev:client",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\""

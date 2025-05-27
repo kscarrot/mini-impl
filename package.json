@@ -1,0 +1,19 @@
+{
+  "name": "mini-impl",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "micro-app",
+    "monorepo"
+  ],
+  "author": "ks",
+  "license": "ISC",
+  "volta": {
+    "node": "24.1.0",
+    "pnpm": "10.11.0"
+  }
+}

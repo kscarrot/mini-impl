@@ -1,0 +1,21 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Koa Server",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/apps/server/src/index.ts",
+      "outFiles": ["${workspaceFolder}/apps/server/dist/**/*.js"],
+      "preLaunchTask": "tsc: build - apps/server/tsconfig.json",
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "!**/node_modules/**"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    }
+  ]
+} 

@@ -1,7 +1,7 @@
-import type { FC } from "react";
+import type { FC } from 'react'
 
 const List: FC = () => {
-  return ["a", "b", "c"].map((item) => <div key={item}>{item}</div>);
-};
+  return ['a', 'b', 'c'].map(item => <div key={item}>{item}</div>)
+}
 
-export default List;
+export default List

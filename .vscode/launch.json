@@ -10,12 +10,9 @@
       "outFiles": ["${workspaceFolder}/apps/server/dist/**/*.js"],
       "preLaunchTask": "tsc: build - apps/server/tsconfig.json",
       "sourceMaps": true,
-      "resolveSourceMapLocations": [
-        "${workspaceFolder}/**",
-        "!**/node_modules/**"
-      ],
+      "resolveSourceMapLocations": ["${workspaceFolder}/**", "!**/node_modules/**"],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen"
     }
   ]
-} 
+}

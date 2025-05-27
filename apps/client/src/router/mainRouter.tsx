@@ -1,21 +1,21 @@
-import { createBrowserRouter } from "react-router";
-import Home from "src/page/Home";
-import Error from "src/page/Error";
-import List from "src/page/List";
+import { createBrowserRouter } from 'react-router'
+import Home from 'src/page/Home'
+import Error from 'src/page/Error'
+import List from 'src/page/List'
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <Home />,
   },
   {
-    path: "/list",
+    path: '/list',
     element: <List />,
   },
   {
-    path: "*",
+    path: '*',
     element: <Error />,
   },
-]);
+])
 
-export default router;
+export default router

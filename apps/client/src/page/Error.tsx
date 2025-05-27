@@ -1,7 +1,7 @@
-import type { FC } from "react";
+import type { FC } from 'react'
 
 const Error: FC = () => {
-  return <div>Error</div>;
-};
+  return <div>Error</div>
+}
 
-export default Error;
+export default Error

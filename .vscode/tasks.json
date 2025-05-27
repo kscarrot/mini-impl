@@ -10,6 +10,55 @@
         "isDefault": true
       },
       "label": "tsc: build - apps/server/tsconfig.json"
+    },
+    {
+      "label": "Start Dev Environment",
+      "dependsOn": ["Start Server", "Start Client"],
+      "group": "build"
+    },
+    {
+      "label": "Start Server",
+      "type": "shell",
+      "command": "pnpm dev:server",
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "."
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".",
+          "endsPattern": "Server is running on"
+        }
+      }
+    },
+    {
+      "label": "Start Client",
+      "type": "shell",
+      "command": "pnpm dev:client",
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "."
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".",
+          /**
+           * vite dev print :https://github.com/vitejs/vite/blob/main/packages/vite/src/node/shortcuts.ts#L43
+           * 执行在 configureServer钩子之后 不hack了 直接监听默认print
+           */
+          "endsPattern": "help"
+        }
+      }
     }
   ]
 }

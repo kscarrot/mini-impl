@@ -16,10 +16,10 @@
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "files.exclude": {
-    "**/dist": true,
-    "**/node_modules": true
-  },
+  //   "files.exclude": {
+  //     "**/dist": true,
+  //     "**/node_modules": true
+  //   },
   "search.exclude": {
     "**/dist": true,
     "**/node_modules": true

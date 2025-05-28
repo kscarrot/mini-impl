@@ -1,5 +1,5 @@
-import type { FC } from 'react'
-import { Link, Outlet } from 'react-router'
+import type { FC } from 'react';
+import { Link, Outlet } from 'react-router';
 
 const Home: FC = () => {
   return (
@@ -15,7 +15,7 @@ const Home: FC = () => {
       </nav>
       <Outlet />
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

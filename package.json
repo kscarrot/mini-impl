@@ -8,7 +8,9 @@
     "dev:server": "pnpm --filter koa-server run dev",
     "dev:client": "pnpm --filter react-fe run dev",
     "dev": "pnpm run dev:server & pnpm run dev:client",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\""
   },
@@ -23,6 +25,10 @@
     "pnpm": "10.11.0"
   },
   "devDependencies": {
-    "prettier": "3.5.3"
+    "@types/jest": "^29.5.0",
+    "jest": "^29.5.0",
+    "prettier": "3.5.3",
+    "ts-jest": "^29.1.0",
+    "typescript": "^5.0.0"
   }
 }

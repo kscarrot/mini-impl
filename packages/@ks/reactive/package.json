@@ -2,6 +2,7 @@
   "name": "@ks/reactive",
   "version": "1.0.0",
   "description": "响应式相关代码的简单实现",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,5 +16,8 @@
   "packageManager": "pnpm@10.11.0",
   "volta": {
     "extends": "../../../package.json"
+  },
+  "dependencies": {
+    "radash": "^12.1.0"
   }
 }

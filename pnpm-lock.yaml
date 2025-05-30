@@ -98,7 +98,7 @@ importers:
         specifier: ^5.8.3
         version: 5.8.3
 
-  packages/@ks/reactive:
+  packages/reactive:
     dependencies:
       radash:
         specifier: ^12.1.0

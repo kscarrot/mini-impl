@@ -1,4 +1,5 @@
-import Koa, { Context, Next } from 'koa';
+import Koa from 'koa';
+import type { Context, Next } from 'koa';
 
 const app = new Koa();
 const port = process.env.PORT || 3000;

@@ -6,6 +6,7 @@
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true,
+    //强制大小写一致
     "forceConsistentCasingInFileNames": true,
     "sourceMap": true
   },

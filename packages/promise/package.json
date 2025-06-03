@@ -1,0 +1,24 @@
+{
+  "name": "@ks/promise",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "type": "module",
+  "scripts": {
+    "test": "node --loader ts-node/esm src/myPromiseTest.ts"
+  },
+  "keywords": [
+    "promise"
+  ],
+  "author": "ks",
+  "license": "ISC",
+  "packageManager": "pnpm@10.11.0",
+  "volta": {
+    "extends": "../../package.json"
+  },
+  "devDependencies": {
+    "promises-aplus-tests": "^2.1.2",
+    "ts-node": "workspace:*",
+    "typescript": "workspace:*"
+  }
+}

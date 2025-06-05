@@ -4,6 +4,8 @@ import http2 from 'http2';
 import fs from 'fs';
 import path from 'path';
 import type { TLSSocket } from 'tls';
+import serve from 'koa-static';
+import { setupWebSocket } from './websocket';
 
 const app = new Koa();
 const port = process.env.PORT || 3000;
@@ -30,15 +32,8 @@ app.use(async (ctx: Context, next: Next) => {
   }
 });
 
-// 静态文件服务，/ 或 /index.html 返回 index.html
-app.use(async (ctx: Context, next: Next) => {
-  if (ctx.path === '/' || ctx.path === '/index.html') {
-    ctx.type = 'text/html';
-    ctx.body = fs.createReadStream(path.join(__dirname, '../public/index.html'));
-  } else {
-    await next();
-  }
-});
+// 静态文件服务
+app.use(serve('public'));
 
 // 创建 HTTP/2 服务器
 const options = {
@@ -48,6 +43,9 @@ const options = {
 };
 
 const server = http2.createSecureServer(options, app.callback());
+
+// 设置 WebSocket 服务器
+setupWebSocket(server);
 
 server.listen(port, () => {
   console.log(`HTTP/2 Server is running on https://localhost:${port}`);

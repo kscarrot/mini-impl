@@ -12,6 +12,9 @@ const Home: FC = () => {
         <Link to="/list" style={{ marginRight: '15px' }}>
           列表
         </Link>
+        <Link to="/vue2-login" style={{ marginRight: '15px' }}>
+          vue2-login
+        </Link>
       </nav>
       <Outlet />
     </>

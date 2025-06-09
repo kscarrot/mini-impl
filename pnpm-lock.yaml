@@ -32,6 +32,9 @@ importers:
 
   apps/client:
     dependencies:
+      '@mini-impl/vue2wrapper':
+        specifier: workspace:*
+        version: link:../../packages/vue2wrapper
       react:
         specifier: ^19.1.0
         version: 19.1.0

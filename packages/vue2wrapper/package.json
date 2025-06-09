@@ -2,6 +2,12 @@
   "name": "@mini-impl/vue2wrapper",
   "version": "1.0.0",
   "type": "module",
+  "main": "dist/vue2wrapper.umd.js",
+  "module": "dist/vue2wrapper.es.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",

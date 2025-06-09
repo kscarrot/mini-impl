@@ -2,8 +2,8 @@
   "name": "@mini-impl/vue2-login",
   "version": "1.0.0",
   "description": "Vue 2.7 login component",
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
+  "main": "dist/index.umd.js",
+  "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist"

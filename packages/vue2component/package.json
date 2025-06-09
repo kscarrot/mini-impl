@@ -1,0 +1,35 @@
+{
+  "name": "@mini-impl/vue2-login",
+  "version": "1.0.0",
+  "description": "Vue 2.7 login component",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "dev": "NODE_ENV=development vite",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "vue": "^2.7.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue2": "^2.2.0",
+    "vite": "^4.5.0",
+    "vite-plugin-dts": "^3.0.0",
+    "vue-template-compiler": "^2.7.14"
+  },
+  "keywords": [
+    "vue",
+    "login",
+    "component"
+  ],
+  "author": "ks",
+  "license": "MIT",
+  "volta": {
+    "extends": "../../package.json"
+  }
+}

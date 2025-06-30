@@ -1,6 +1,7 @@
 import type { HTTPMethod } from 'find-my-way';
 import type { Context, Next } from 'koa';
 import { TLSSocket } from 'tls';
+import { SSEController } from '../controller/sseController';
 
 export type RouterConfig = {
   method: HTTPMethod;
@@ -33,4 +34,5 @@ export const paramHandler = async (ctx: Context, next: Next) => {
 export const routerConfigs: RouterConfig[] = [
   { method: 'GET', path: '/api/hello', handler: defaultHandler },
   { method: 'GET', path: '/api/:param', handler: paramHandler },
+  { method: 'GET', path: '/api/sse', handler: SSEController.handleSSE },
 ];

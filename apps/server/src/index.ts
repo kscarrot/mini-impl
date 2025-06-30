@@ -29,4 +29,5 @@ setupWebSocket(server);
 server.listen(port, () => {
   console.log(`HTTP/2 Server is running on https://localhost:${port}`);
   console.log(`WebSocket Server page: https://localhost:${port}/websocket.html`);
+  console.log(`SSE Server page: https://localhost:${port}/sse.html`);
 });

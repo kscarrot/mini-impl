@@ -39,7 +39,7 @@
       <p id="timestamp" class="timestamp"></p>
     </div>
     <script>
-      fetch('/api')
+      fetch('/api/hello')
         .then(response => response.json())
         .then(data => {
           document.getElementById('protocol').textContent = `当前协议: ${data.protocol}`;

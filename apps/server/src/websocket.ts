@@ -4,13 +4,12 @@ import { Http2SecureServer } from 'http2';
 const HEARTBEAT_INTERVAL = 30000; // 30秒
 
 export function setupWebSocket(server: Http2SecureServer) {
-  const wss = new WebSocketServer({
-    server: server as any,
-    path: '/ws',
-  });
+  // 创建 WebSocket 服务器
+  const wss = new WebSocketServer({ noServer: true });
 
-  wss.on('connection', (ws: WebSocket) => {
-    console.log('Client connected');
+  // 处理 WebSocket 连接
+  wss.on('connection', (ws: WebSocket, request: any) => {
+    console.log('Client connected via route');
 
     // 设置心跳检测
     let isAlive = true;
@@ -48,6 +47,13 @@ export function setupWebSocket(server: Http2SecureServer) {
 
     // 发送欢迎消息
     ws.send('欢迎连接到WebSocket服务器！');
+  });
+
+  // 处理 HTTP 升级请求
+  server.on('upgrade', (request, socket, head) => {
+    wss.handleUpgrade(request, socket, head, ws => {
+      wss.emit('connection', ws, request);
+    });
   });
 
   return wss;

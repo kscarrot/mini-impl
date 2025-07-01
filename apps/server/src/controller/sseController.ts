@@ -1,5 +1,4 @@
 import type { Context, Next } from 'koa';
-import { formatSSEMessage } from '../utils/sseHelper';
 
 /**
  * SSE Controller
@@ -29,35 +28,45 @@ export class SSEController {
       message: `SSE连接已建立,协议: ${ctx.req.httpVersion}`,
       timestamp: new Date().toISOString(),
     };
-    ctx.res.write(formatSSEMessage(connectMessage));
+    ctx.res.write(`data: ${JSON.stringify(connectMessage)}\n\n`);
+
+    // 苏轼《定风波》诗词内容
+    const dingFengBo = [
+      '莫听穿林打叶声，何妨吟啸且徐行。',
+      '竹杖芒鞋轻胜马，谁怕？一蓑烟雨任平生。',
+      '料峭春风吹酒醒，微冷，山头斜照却相迎。',
+      '回首向来萧瑟处，归去，也无风雨也无晴。',
+    ];
 
     let messageCount = 0;
     const timer = setInterval(() => {
       try {
         messageCount++;
         const data = {
-          msg: '服务器推送消息',
+          type: 'content',
+          msg: dingFengBo[messageCount - 1] || '诗词已结束',
           time: new Date().toISOString(),
-          count: Math.floor(Math.random() * 1000),
           messageCount,
+          author: '苏轼',
+          title: '定风波·莫听穿林打叶声',
         };
-        ctx.res.write(formatSSEMessage(data));
+        ctx.res.write(`data: ${JSON.stringify(data)}\n\n`);
 
-        if (messageCount >= 10) {
+        if (messageCount >= 4) {
           const endMessage = {
             type: 'end',
-            message: 'SSE连接结束，已发送10条消息',
+            message: '苏轼《定风波》推送完毕',
             timestamp: new Date().toISOString(),
             totalMessages: messageCount,
           };
-          ctx.res.write(formatSSEMessage(endMessage));
+          ctx.res.write(`data: ${JSON.stringify(endMessage)}\n\n`);
           clearInterval(timer);
           ctx.res.end();
         }
       } catch (error) {
         clearInterval(timer);
       }
-    }, 1000);
+    }, 1000); // 每1秒推送一句
 
     ctx.req.on('close', () => {
       clearInterval(timer);

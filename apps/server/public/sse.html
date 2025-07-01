@@ -60,7 +60,7 @@
         cursor: not-allowed;
       }
       .messages {
-        height: 320px;
+        height: 500px;
         overflow-y: auto;
         border: 1px solid #eee;
         background: #fafbfc;
@@ -107,7 +107,17 @@
         const div = document.createElement('div');
         div.className = 'message';
         const now = new Date();
-        div.innerHTML = `<span>${typeof msg === 'string' ? msg : JSON.stringify(msg)}</span><span class='timestamp'>${now.toLocaleTimeString()}</span>`;
+
+        let displayContent;
+        if (typeof msg === 'string') {
+          displayContent = msg;
+        } else if (msg.type === 'content') {
+          displayContent = msg.msg;
+        } else {
+          displayContent = JSON.stringify(msg);
+        }
+
+        div.innerHTML = `<span>${displayContent}</span><span class='timestamp'>${now.toLocaleTimeString()}</span>`;
         messages.appendChild(div);
         messages.scrollTop = messages.scrollHeight;
       }

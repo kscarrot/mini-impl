@@ -3,6 +3,7 @@ import http2 from 'http2';
 import fs from 'fs';
 import path from 'path';
 import serve from 'koa-static';
+import bodyParser from 'koa-bodyparser';
 import { setupWebSocket } from './websocket';
 import { logger } from './middleware/logger';
 import { router } from './router/entry';
@@ -11,6 +12,7 @@ const app = new Koa();
 const port = process.env.PORT || 3000;
 
 app.use(logger); // 日志中间件
+app.use(bodyParser()); // 解析请求体中间件
 app.use(router());
 app.use(serve('public')); // 静态文件服务
 
@@ -28,6 +30,10 @@ setupWebSocket(server);
 
 server.listen(port, () => {
   console.log(`HTTP/2 Server is running on https://localhost:${port}`);
+  console.log(`Navigation page: https://localhost:${port}/`);
+  console.log(`Protocol Test page: https://localhost:${port}/protocol-test.html`);
   console.log(`WebSocket Server page: https://localhost:${port}/websocket.html`);
   console.log(`SSE Server page: https://localhost:${port}/sse.html`);
+  console.log(`Message Sender page: https://localhost:${port}/send-message.html`);
+  console.log(`Message Receiver page: https://localhost:${port}/receive-message.html`);
 });

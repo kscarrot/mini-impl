@@ -1,44 +1,146 @@
 <!doctype html>
-<html lang="zh">
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HTTP/2 测试页面</title>
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIGZpbGw9IiNmZmZmZmYiLz48dGV4dCB4PSI1IiB5PSIyNiIgZm9udC1zaXplPSIyMCIgZmlsbD0iYmxhY2siIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIj5LUzwvdGV4dD48L3N2Zz4="
-    />
+    <title>HTTP/2 功能导航</title>
     <style>
       body {
-        font-family:
-          -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
-          'Helvetica Neue', sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         max-width: 800px;
         margin: 0 auto;
         padding: 20px;
         line-height: 1.6;
-      }
-      .protocol-info {
         background: #f5f5f5;
-        padding: 20px;
-        border-radius: 8px;
-        margin: 20px 0;
       }
-      .timestamp {
+
+      .header {
+        text-align: center;
+        margin-bottom: 30px;
+        padding: 20px;
+        background: #667eea;
+        color: white;
+        border-radius: 8px;
+      }
+
+      .header h1 {
+        margin: 0;
+        font-size: 2em;
+      }
+
+      .nav-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .nav-item {
+        background: white;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .nav-link {
+        display: block;
+        padding: 20px;
+        text-decoration: none;
+        color: #333;
+        transition: background 0.2s;
+      }
+
+      .nav-link:hover {
+        background: #f8f9fa;
+      }
+
+      .nav-title {
+        font-size: 1.2em;
+        font-weight: bold;
+        margin-bottom: 8px;
+        color: #2d3748;
+      }
+
+      .nav-desc {
         color: #666;
+        font-size: 0.9em;
+        margin: 0;
+      }
+
+      .protocol-info {
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .protocol-info h2 {
+        margin: 0 0 15px 0;
+        color: #2d3748;
+      }
+
+      .protocol-info p {
+        margin: 8px 0;
+        color: #4a5568;
+      }
+
+      .timestamp {
+        color: #718096;
         font-size: 0.9em;
       }
     </style>
   </head>
   <body>
-    <h1>HTTP/2 测试页面</h1>
+    <div class="header">
+      <h1>🚀 HTTP/2 功能导航</h1>
+    </div>
+
     <div class="protocol-info">
-      <h2>服务器信息</h2>
+      <h2>📊 服务器信息</h2>
       <p id="protocol">正在加载协议信息...</p>
       <p id="timestamp" class="timestamp"></p>
     </div>
+
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="/protocol-test.html" class="nav-link">
+          <div class="nav-title">🌐 协议测试</div>
+          <p class="nav-desc">测试当前连接的 HTTP 协议版本和服务器状态</p>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a href="/sse.html" class="nav-link">
+          <div class="nav-title">📡 SSE 诗词推送</div>
+          <p class="nav-desc">体验 Server-Sent Events 功能，接收苏轼《定风波》诗词</p>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a href="/send-message.html" class="nav-link">
+          <div class="nav-title">💬 消息发送器</div>
+          <p class="nav-desc">编辑并发送消息到活跃的 SSE 连接</p>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a href="/receive-message.html" class="nav-link">
+          <div class="nav-title">📨 消息接收器</div>
+          <p class="nav-desc">建立 SSE 连接接收实时消息推送</p>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a href="/websocket.html" class="nav-link">
+          <div class="nav-title">🔌 WebSocket 测试</div>
+          <p class="nav-desc">测试 WebSocket 双向实时通信功能</p>
+        </a>
+      </li>
+    </ul>
+
     <script>
+      // 加载服务器协议信息
       fetch('/api/hello')
         .then(response => response.json())
         .then(data => {

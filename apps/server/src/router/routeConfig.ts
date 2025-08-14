@@ -2,6 +2,7 @@ import type { HTTPMethod } from 'find-my-way';
 import type { Context, Next } from 'koa';
 import { TLSSocket } from 'tls';
 import { SSEController } from '../controller/sseController';
+import { MessageController } from '../controller/messageController';
 
 export type RouterConfig = {
   method: HTTPMethod;
@@ -35,4 +36,6 @@ export const routerConfigs: RouterConfig[] = [
   { method: 'GET', path: '/api/hello', handler: defaultHandler },
   { method: 'GET', path: '/api/:param', handler: paramHandler },
   { method: 'GET', path: '/api/sse', handler: SSEController.handleSSE },
+  { method: 'POST', path: '/api/send-message', handler: MessageController.sendMessage },
+  { method: 'GET', path: '/api/receive-message', handler: MessageController.receiveMessage },
 ];

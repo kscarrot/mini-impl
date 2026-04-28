@@ -1,3 +1,4 @@
+import { vi } from 'vitest';
 import { observe, createCollector } from './defineProperty.ts';
 
 describe('测试Object.defineProperty响应性', () => {
@@ -10,7 +11,7 @@ describe('测试Object.defineProperty响应性', () => {
       arrayKey: [{ arraItemKey: 9 }, 2, 3],
     };
 
-    let jsmockFn = jest.fn();
+    let jsmockFn = vi.fn();
     const rootCollector = createCollector(jsmockFn);
     observe(data, rootCollector);
 

@@ -5,7 +5,7 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "node --watch -r ts-node/register src/index.ts",
+    "dev": "node --watch --experimental-strip-types src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
     "watch": "tsc -w",
@@ -35,6 +35,6 @@
     "@types/koa-static": "^4.0.4",
     "@types/node": "^22.15.21",
     "@types/ws": "^8.5.10",
-    "typescript": "^5.8.3"
+    "typescript": "^6.0.3"
   }
 }

@@ -1,21 +1,22 @@
+import { vi } from 'vitest';
 import { all, allSettled, _finally, race, any, concurrent } from './promiseMethods.ts';
 
 describe('测试 Promise all allSettled', () => {
-  test('空值情况', () => {
+  test('空值情况', async () => {
     const promises: Promise<any>[] = [];
-    expect(all(promises)).resolves.toEqual([]);
-    expect(allSettled(promises)).resolves.toEqual([]);
+    await expect(all(promises)).resolves.toEqual([]);
+    await expect(allSettled(promises)).resolves.toEqual([]);
   });
 
   it('全部成功的情况', async () => {
     const promises = [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)];
-    const mockFullfilled = jest.fn();
+    const mockFullfilled = vi.fn();
     await all(promises).then(mockFullfilled);
     expect(mockFullfilled).toHaveBeenCalledTimes(1);
     const result = await all(promises);
     expect(result).toEqual([1, 2, 3]);
 
-    const mockFullfilledSettled = jest.fn();
+    const mockFullfilledSettled = vi.fn();
     await allSettled(promises).then(mockFullfilledSettled);
     expect(mockFullfilledSettled).toHaveBeenCalledTimes(1);
     const resultSettled = await allSettled(promises);
@@ -28,10 +29,10 @@ describe('测试 Promise all allSettled', () => {
 
   it('单个异常', async () => {
     const promises = [Promise.resolve(1), Promise.reject(new Error('error')), Promise.resolve(3)];
-    const mockFullfilled = jest.fn();
-    const mockRejected = jest.fn();
+    const mockFullfilled = vi.fn();
+    const mockRejected = vi.fn();
 
-    expect(all(promises).then(mockFullfilled)).rejects.toThrow('error');
+    await expect(all(promises).then(mockFullfilled)).rejects.toThrow('error');
     expect(mockFullfilled).toHaveBeenCalledTimes(0);
     expect(mockRejected).toHaveBeenCalledTimes(0);
 
@@ -39,7 +40,7 @@ describe('测试 Promise all allSettled', () => {
     expect(mockRejected).toHaveBeenCalledTimes(1);
     expect(result).toBeUndefined();
 
-    const mockFullfilledSettled = jest.fn();
+    const mockFullfilledSettled = vi.fn();
     await allSettled(promises).then(mockFullfilledSettled);
     expect(mockFullfilledSettled).toHaveBeenCalledTimes(1);
     const resultSettled = await allSettled(promises);
@@ -52,9 +53,9 @@ describe('测试 Promise all allSettled', () => {
 
   it('多个异常', async () => {
     const promises = [Promise.reject(new Error('error1')), Promise.reject(new Error('error2'))];
-    expect(all(promises)).rejects.toThrow('error1');
+    await expect(all(promises)).rejects.toThrow('error1');
 
-    const mockFullfilledSettled = jest.fn();
+    const mockFullfilledSettled = vi.fn();
     await allSettled(promises).then(mockFullfilledSettled);
     expect(mockFullfilledSettled).toHaveBeenCalledTimes(1);
     const resultSettled = await allSettled(promises);
@@ -72,7 +73,7 @@ describe('测试 Promise _finally', () => {
         resolve('success');
       }, 0);
     });
-    const mockFinally = jest.fn();
+    const mockFinally = vi.fn();
     const result = await _finally(promise, mockFinally);
     expect(mockFinally).toHaveBeenCalledTimes(1);
     expect(result).toBe('success');
@@ -82,8 +83,8 @@ describe('测试 Promise _finally', () => {
     const promise = new Promise((_, reject) => {
       reject(new Error('error'));
     });
-    const mockFinally = jest.fn();
-    const mockRejected = jest.fn();
+    const mockFinally = vi.fn();
+    const mockRejected = vi.fn();
     const result = await _finally(promise, mockFinally).catch(mockRejected);
 
     expect(mockFinally).toHaveBeenCalledTimes(1);
@@ -101,7 +102,7 @@ describe('测试 Promise race', () => {
 
   it('异常情况', async () => {
     const promises = [Promise.reject(new Error('error1')), Promise.reject(new Error('error2'))];
-    const mockRejected = jest.fn();
+    const mockRejected = vi.fn();
     const result = await race(promises).catch(mockRejected);
     expect(mockRejected).toHaveBeenCalledTimes(1);
     expect(result).toBeUndefined();
@@ -117,7 +118,7 @@ describe('测试 Promise any', () => {
 
   it('异常情况', async () => {
     const promises = [Promise.reject(new Error('error1')), Promise.reject(new Error('error2'))];
-    const mockRejected = jest.fn();
+    const mockRejected = vi.fn();
     const result = await any(promises).catch(mockRejected);
     expect(mockRejected).toHaveBeenCalledTimes(1);
     expect(result).toBeUndefined();

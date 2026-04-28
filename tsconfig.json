@@ -8,7 +8,8 @@
     "skipLibCheck": true,
     //强制大小写一致
     "forceConsistentCasingInFileNames": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "types": ["node", "vitest/globals"]
   },
   "exclude": ["node_modules", "dist"]
 }

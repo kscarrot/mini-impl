@@ -5,7 +5,8 @@
   "main": "index.ts",
   "type": "module",
   "scripts": {
-    "test": "node --loader ts-node/esm src/myPromiseTest.ts"
+    "test": "pnpm --dir ../.. exec vitest run packages/promise",
+    "test:aplus": "node --experimental-strip-types src/myPromiseTest.ts"
   },
   "keywords": [
     "promise"
@@ -18,7 +19,6 @@
   },
   "devDependencies": {
     "promises-aplus-tests": "^2.1.2",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.0.0"
+    "typescript": "^6.0.3"
   }
 }

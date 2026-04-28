@@ -1,14 +1,16 @@
+import { type Mock, vi } from 'vitest';
+
 describe('测试事件循环执行顺序', () => {
-  let consoleLog: jest.Mock;
+  let consoleLog: Mock;
 
   beforeEach(() => {
-    jest.useFakeTimers();
-    consoleLog = jest.fn();
+    vi.useFakeTimers();
+    consoleLog = vi.fn();
   });
 
   afterEach(() => {
     consoleLog.mockRestore();
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
 
   it('setTimeout和Promise的顺序 微任务清空后才会调用宏任务队列', async () => {
@@ -35,7 +37,7 @@ describe('测试事件循环执行顺序', () => {
 
     consoleLog('end');
 
-    await jest.advanceTimersByTimeAsync(1000);
+    await vi.advanceTimersByTimeAsync(1000);
 
     // 验证执行顺序
     expect(consoleLog.mock.calls).toStrictEqual([
@@ -83,7 +85,7 @@ describe('测试事件循环执行顺序', () => {
      * 参考stackoverflow问题:https://stackoverflow.com/questions/52177631
      * 可以避免手动模拟调用栈
      */
-    await jest.advanceTimersByTimeAsync(1000);
+    await vi.advanceTimersByTimeAsync(1000);
 
     expect(consoleLog.mock.calls).toStrictEqual([
       ['start'],
@@ -124,7 +126,7 @@ describe('测试事件循环执行顺序', () => {
 
     await aysncCallExec();
 
-    await jest.advanceTimersByTimeAsync(1000);
+    await vi.advanceTimersByTimeAsync(1000);
 
     expect(consoleLog.mock.calls).toStrictEqual([
       ['script start'],

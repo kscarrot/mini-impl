@@ -1,7 +1,8 @@
-import { defineConfig } from 'vite';
-import vue2 from '@vitejs/plugin-vue2';
-import dts from 'vite-plugin-dts';
-import { resolve } from 'path';
+import { resolve } from 'node:path'
+import process from 'node:process'
+import vue2 from '@vitejs/plugin-vue2'
+import { defineConfig } from 'vite'
+import dts from 'vite-plugin-dts'
 
 export default defineConfig({
   plugins: [
@@ -36,4 +37,4 @@ export default defineConfig({
       '@': resolve(__dirname, 'src'),
     },
   },
-});
+})

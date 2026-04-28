@@ -1,13 +1,13 @@
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { defineConfig } from 'vitest/config';
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { defineConfig } from 'vitest/config'
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 /** Mirrors former tsconfig.jest paths: `@ks/<pkg>` → `packages/<pkg>/src` */
 function ksAlias(): Record<string, string> {
-  const pkgs = ['promise', 'reactive', 'vue2component', 'vue2wrapper'] as const;
-  return Object.fromEntries(pkgs.map(name => [`@ks/${name}`, path.resolve(__dirname, `packages/${name}/src`)]));
+  const pkgs = ['promise', 'reactive', 'vue2component', 'vue2wrapper'] as const
+  return Object.fromEntries(pkgs.map(name => [`@ks/${name}`, path.resolve(__dirname, `packages/${name}/src`)]))
 }
 
 export default defineConfig({
@@ -26,4 +26,4 @@ export default defineConfig({
       exclude: ['**/*.test.ts', '**/node_modules/**'],
     },
   },
-});
+})

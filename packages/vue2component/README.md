@@ -13,22 +13,23 @@ npm install @mini-impl/vue2-login
 ### 全局注册
 
 ```js
-import Vue from 'vue';
-import Vue2Login from '@mini-impl/vue2-login';
+import Vue2Login from '@mini-impl/vue2-login'
+import Vue from 'vue'
 
-Vue.use(Vue2Login);
+// eslint-disable-next-line react-hooks/rules-of-hooks
+Vue.use(Vue2Login)
 ```
 
 ### 局部注册
 
 ```js
-import { Vue2Login } from '@mini-impl/vue2-login';
+import { Vue2Login } from '@mini-impl/vue2-login'
 
 export default {
   components: {
     Vue2Login,
   },
-};
+}
 ```
 
 ### 在模板中使用

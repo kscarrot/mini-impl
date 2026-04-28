@@ -1,7 +1,7 @@
 {
   "name": "@mini-impl/vue2wrapper",
-  "version": "1.0.0",
   "type": "module",
+  "version": "1.0.0",
   "main": "dist/vue2wrapper.umd.js",
   "module": "dist/vue2wrapper.es.js",
   "types": "dist/index.d.ts",

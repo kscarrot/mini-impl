@@ -1,7 +1,7 @@
-import { defineConfig } from 'vite';
-import { createVuePlugin } from 'vite-plugin-vue2';
-import { resolve } from 'path';
-import { copyFileSync } from 'fs';
+import { copyFileSync } from 'node:fs'
+import { resolve } from 'node:path'
+import { defineConfig } from 'vite'
+import { createVuePlugin } from 'vite-plugin-vue2'
 
 export default defineConfig({
   plugins: [
@@ -10,7 +10,7 @@ export default defineConfig({
       name: 'copy-types',
       closeBundle() {
         // 复制类型声明文件到 dist 目录
-        copyFileSync('src/index.d.ts', 'dist/index.d.ts');
+        copyFileSync('src/index.d.ts', 'dist/index.d.ts')
       },
     },
   ],
@@ -24,7 +24,7 @@ export default defineConfig({
       external: ['vue', '@vue/web-component-wrapper'],
       output: {
         globals: {
-          vue: 'Vue',
+          'vue': 'Vue',
           '@vue/web-component-wrapper': 'wrap',
         },
       },
@@ -39,4 +39,4 @@ export default defineConfig({
       '@': resolve(__dirname, 'src'),
     },
   },
-});
+})

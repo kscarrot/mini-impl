@@ -1,35 +1,35 @@
-import type { HTTPMethod } from 'find-my-way';
-import type { Context, Next } from 'koa';
-import { TLSSocket } from 'tls';
-import { SSEController } from '../controller/sseController';
-import { MessageController } from '../controller/messageController';
+import type { HTTPMethod } from 'find-my-way'
+import type { Context, Next } from 'koa'
+import type { TLSSocket } from 'node:tls'
+import { MessageController } from '../controller/messageController.ts'
+import { SSEController } from '../controller/sseController.ts'
 
-export type RouterConfig = {
-  method: HTTPMethod;
-  path: string;
-  handler: (ctx: Context, next: Next) => Promise<void>;
-};
+export interface RouterConfig {
+  method: HTTPMethod
+  path: string
+  handler: (ctx: Context, next: Next) => Promise<void>
+}
 
 // 默认处理器
-export const defaultHandler = async (ctx: Context, next: Next) => {
+export async function defaultHandler(ctx: Context, next: Next) {
   ctx.body = {
     message: `RouterHander Path:${ctx.path}`,
     timestamp: new Date().toISOString(),
     protocol: (ctx.req.socket as TLSSocket).alpnProtocol || 'http/1.1',
-  };
-  await next();
-};
+  }
+  await next()
+}
 
 // 参数处理器
-export const paramHandler = async (ctx: Context, next: Next) => {
-  console.log('路径:', ctx.path, '参数:', ctx.params);
+export async function paramHandler(ctx: Context, next: Next) {
+  console.log('路径:', ctx.path, '参数:', ctx.params)
   ctx.body = {
     message: `RouterHander Path:${ctx.path}`,
     timestamp: new Date().toISOString(),
     params: ctx.params.param,
-  };
-  return next();
-};
+  }
+  return next()
+}
 
 // 路由配置
 export const routerConfigs: RouterConfig[] = [
@@ -38,4 +38,4 @@ export const routerConfigs: RouterConfig[] = [
   { method: 'GET', path: '/api/sse', handler: SSEController.handleSSE },
   { method: 'POST', path: '/api/send-message', handler: MessageController.sendMessage },
   { method: 'GET', path: '/api/receive-message', handler: MessageController.receiveMessage },
-];
+]

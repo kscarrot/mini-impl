@@ -106,33 +106,33 @@
     </div>
 
     <script>
-      const form = document.getElementById('messageForm');
-      const messageInput = document.getElementById('message');
-      const sendBtn = document.getElementById('sendBtn');
-      const statusDiv = document.getElementById('status');
+      const form = document.getElementById('messageForm')
+      const messageInput = document.getElementById('message')
+      const sendBtn = document.getElementById('sendBtn')
+      const statusDiv = document.getElementById('status')
 
       function showStatus(message, type) {
-        statusDiv.textContent = message;
-        statusDiv.className = `status ${type}`;
-        statusDiv.style.display = 'block';
+        statusDiv.textContent = message
+        statusDiv.className = `status ${type}`
+        statusDiv.style.display = 'block'
       }
 
       function setLoading(loading) {
-        sendBtn.disabled = loading;
-        sendBtn.textContent = loading ? '发送中...' : '发送消息';
+        sendBtn.disabled = loading
+        sendBtn.textContent = loading ? '发送中...' : '发送消息'
       }
 
-      form.addEventListener('submit', async e => {
-        e.preventDefault();
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault()
 
-        const message = messageInput.value.trim();
+        const message = messageInput.value.trim()
         if (!message) {
-          showStatus('请输入消息内容', 'error');
-          return;
+          showStatus('请输入消息内容', 'error')
+          return
         }
 
-        setLoading(true);
-        showStatus('正在发送消息...', 'info');
+        setLoading(true)
+        showStatus('正在发送消息...', 'info')
 
         try {
           const response = await fetch('/api/send-message', {
@@ -141,26 +141,26 @@
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({ message }),
-          });
+          })
 
-          const result = await response.json();
+          const result = await response.json()
 
           if (response.ok && result.success) {
-            showStatus('消息发送成功！', 'success');
-            messageInput.value = '';
+            showStatus('消息发送成功！', 'success')
+            messageInput.value = ''
           } else {
-            showStatus(`发送失败: ${result.error || '未知错误'}`, 'error');
+            showStatus(`发送失败: ${result.error || '未知错误'}`, 'error')
           }
         } catch (error) {
-          console.error('发送消息失败:', error);
-          showStatus('发送失败: 网络错误', 'error');
+          console.error('发送消息失败:', error)
+          showStatus('发送失败: 网络错误', 'error')
         } finally {
-          setLoading(false);
+          setLoading(false)
         }
-      });
+      })
 
       // 页面加载时显示状态
-      showStatus('准备发送消息', 'info');
+      showStatus('准备发送消息', 'info')
     </script>
   </body>
 </html>

@@ -11,9 +11,9 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "format": "pnpm --filter react-fe exec eslint . --fix",
-    "format:check": "pnpm --filter react-fe exec eslint .",
-    "cert:generate": "mykert -key-file apps/server/certificates/localhost-key.pem -cert-file apps/server/certificates/localhost.pem localhost 127.0.0.1 ::1"
+    "tc": "pnpm --filter react-fe exec tsc -p tsconfig.app.json --noEmit && pnpm --filter koa-server exec tsc -p tsconfig.json --noEmit && pnpm --filter @ks/promise exec tsc -p tsconfig.json --noEmit && pnpm --filter @ks/reactive exec tsc -p tsconfig.json --noEmit",
+    "format": "pnpm exec eslint apps packages --fix",
+    "format:check": "pnpm exec eslint apps packages"
   },
   "keywords": [
     "micro-app",
@@ -26,8 +26,10 @@
     "pnpm": "10.11.0"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^4.19.0",
     "@types/node": "^22.15.21",
     "@vitest/coverage-v8": "^3.2.4",
+    "eslint": "^9.39.1",
     "typescript": "^6.0.3",
     "vitest": "^3.2.4"
   },

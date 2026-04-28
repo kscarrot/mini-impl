@@ -1,1 +1,1 @@
-console.log('@ks/reactive');
+console.log('@ks/reactive')

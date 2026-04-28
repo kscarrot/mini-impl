@@ -2,6 +2,13 @@
   "name": "@mini-impl/vue2-login",
   "version": "1.0.0",
   "description": "Vue 2.7 login component",
+  "author": "ks",
+  "license": "MIT",
+  "keywords": [
+    "vue",
+    "login",
+    "component"
+  ],
   "main": "dist/index.umd.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
@@ -22,13 +29,6 @@
     "vite-plugin-dts": "^3.0.0",
     "vue-template-compiler": "^2.7.14"
   },
-  "keywords": [
-    "vue",
-    "login",
-    "component"
-  ],
-  "author": "ks",
-  "license": "MIT",
   "volta": {
     "extends": "../../package.json"
   }

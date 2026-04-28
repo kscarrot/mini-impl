@@ -1,19 +1,19 @@
 {
   "name": "@ks/promise",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.ts",
   "type": "module",
+  "version": "1.0.0",
+  "packageManager": "pnpm@10.11.0",
+  "description": "",
+  "author": "ks",
+  "license": "ISC",
+  "keywords": [
+    "promise"
+  ],
+  "main": "index.ts",
   "scripts": {
     "test": "pnpm --dir ../.. exec vitest run packages/promise",
     "test:aplus": "node --experimental-strip-types src/myPromiseTest.ts"
   },
-  "keywords": [
-    "promise"
-  ],
-  "author": "ks",
-  "license": "ISC",
-  "packageManager": "pnpm@10.11.0",
   "volta": {
     "extends": "../../package.json"
   },

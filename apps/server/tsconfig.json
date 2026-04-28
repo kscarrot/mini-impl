@@ -1,18 +1,20 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "strict": true,
-    "skipLibCheck": true,
-    "types": ["node"],
-    "outDir": "dist",
-    "rootDir": "src",
-    "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "typeRoots": ["./node_modules/@types", "./src/types"],
-    "sourceMap": true,
+    "experimentalDecorators": true,
+    "rootDir": "src",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "types": ["node"],
+    "allowImportingTsExtensions": true,
+    "strict": true,
+    "noEmit": true,
+    "outDir": "dist",
+    "sourceMap": true,
+    "skipLibCheck": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]

@@ -40,15 +40,15 @@
     </div>
     <script>
       fetch('/api/hello')
-        .then(response => response.json())
-        .then(data => {
-          document.getElementById('protocol').textContent = `当前协议: ${data.protocol}`;
-          document.getElementById('timestamp').textContent = `时间戳: ${data.timestamp}`;
+        .then((response) => response.json())
+        .then((data) => {
+          document.getElementById('protocol').textContent = `当前协议: ${data.protocol}`
+          document.getElementById('timestamp').textContent = `时间戳: ${data.timestamp}`
         })
-        .catch(error => {
-          console.error('Error:', error);
-          document.getElementById('protocol').textContent = '加载失败';
-        });
+        .catch((error) => {
+          console.error('Error:', error)
+          document.getElementById('protocol').textContent = '加载失败'
+        })
     </script>
   </body>
 </html>

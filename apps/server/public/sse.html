@@ -96,73 +96,73 @@
       </div>
     </div>
     <script>
-      let eventSource = null;
+      let eventSource = null
       function updateStatus(status, text) {
-        const s = document.getElementById('status');
-        s.className = 'status ' + status;
-        s.textContent = text;
+        const s = document.getElementById('status')
+        s.className = 'status ' + status
+        s.textContent = text
       }
       function addMessage(msg) {
-        const messages = document.getElementById('messages');
-        const div = document.createElement('div');
-        div.className = 'message';
-        const now = new Date();
+        const messages = document.getElementById('messages')
+        const div = document.createElement('div')
+        div.className = 'message'
+        const now = new Date()
 
-        let displayContent;
+        let displayContent
         if (typeof msg === 'string') {
-          displayContent = msg;
+          displayContent = msg
         } else if (msg.type === 'content') {
-          displayContent = msg.msg;
+          displayContent = msg.msg
         } else {
-          displayContent = JSON.stringify(msg);
+          displayContent = JSON.stringify(msg)
         }
 
-        div.innerHTML = `<span>${displayContent}</span><span class='timestamp'>${now.toLocaleTimeString()}</span>`;
-        messages.appendChild(div);
-        messages.scrollTop = messages.scrollHeight;
+        div.innerHTML = `<span>${displayContent}</span><span class='timestamp'>${now.toLocaleTimeString()}</span>`
+        messages.appendChild(div)
+        messages.scrollTop = messages.scrollHeight
       }
       function connectSSE() {
-        if (eventSource) return;
-        updateStatus('connecting', '正在连接...');
-        eventSource = new EventSource('/api/sse');
+        if (eventSource) return
+        updateStatus('connecting', '正在连接...')
+        eventSource = new EventSource('/api/sse')
         eventSource.onopen = function () {
-          updateStatus('connected', '已连接');
-          document.getElementById('connectBtn').disabled = true;
-          document.getElementById('disconnectBtn').disabled = false;
-          addMessage('SSE连接已建立');
-        };
+          updateStatus('connected', '已连接')
+          document.getElementById('connectBtn').disabled = true
+          document.getElementById('disconnectBtn').disabled = false
+          addMessage('SSE连接已建立')
+        }
         eventSource.onmessage = function (e) {
           try {
-            addMessage(JSON.parse(e.data));
+            addMessage(JSON.parse(e.data))
           } catch {
-            addMessage(e.data);
+            addMessage(e.data)
           }
-        };
+        }
         eventSource.onerror = function () {
-          updateStatus('disconnected', '连接断开');
-          document.getElementById('connectBtn').disabled = false;
-          document.getElementById('disconnectBtn').disabled = true;
-          addMessage('SSE连接已断开');
-          eventSource.close();
-          eventSource = null;
-        };
+          updateStatus('disconnected', '连接断开')
+          document.getElementById('connectBtn').disabled = false
+          document.getElementById('disconnectBtn').disabled = true
+          addMessage('SSE连接已断开')
+          eventSource.close()
+          eventSource = null
+        }
       }
       function disconnectSSE() {
         if (eventSource) {
-          eventSource.close();
-          eventSource = null;
-          updateStatus('disconnected', '已断开连接');
-          document.getElementById('connectBtn').disabled = false;
-          document.getElementById('disconnectBtn').disabled = true;
-          addMessage('SSE连接已断开');
+          eventSource.close()
+          eventSource = null
+          updateStatus('disconnected', '已断开连接')
+          document.getElementById('connectBtn').disabled = false
+          document.getElementById('disconnectBtn').disabled = true
+          addMessage('SSE连接已断开')
         }
       }
       function clearMessages() {
-        document.getElementById('messages').innerHTML = '<div class="message">等待连接...</div>';
+        document.getElementById('messages').innerHTML = '<div class="message">等待连接...</div>'
       }
       window.addEventListener('beforeunload', function () {
-        if (eventSource) eventSource.close();
-      });
+        if (eventSource) eventSource.close()
+      })
     </script>
   </body>
 </html>

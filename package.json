@@ -1,26 +1,27 @@
 {
   "name": "mini-impl",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "private": true,
-  "scripts": {
-    "dev:server": "pnpm --filter koa-server run dev",
-    "dev:client": "pnpm --filter react-fe run dev",
-    "dev": "pnpm run dev:server & pnpm run dev:client",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage",
-    "tc": "pnpm --filter react-fe exec tsc -p tsconfig.app.json --noEmit && pnpm --filter koa-server exec tsc -p tsconfig.json --noEmit && pnpm --filter @ks/promise exec tsc -p tsconfig.json --noEmit && pnpm --filter @ks/reactive exec tsc -p tsconfig.json --noEmit",
-    "format": "pnpm exec eslint apps packages --fix",
-    "format:check": "pnpm exec eslint apps packages"
-  },
+  "description": "",
+  "author": "ks",
+  "license": "ISC",
   "keywords": [
     "micro-app",
     "monorepo"
   ],
-  "author": "ks",
-  "license": "ISC",
+  "main": "index.js",
+  "scripts": {
+    "dev:server": "pnpm --filter koa-server run dev",
+    "dev:server:debug": "pnpm --filter koa-server exec tsx --inspect src/index.ts",
+    "dev:client": "pnpm --filter react-fe run dev",
+    "dev": "pnpm run dev:server & pnpm run dev:client",
+    "lint": "pnpm run format:check",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "format": "pnpm exec eslint apps packages --fix",
+    "format:check": "pnpm exec eslint apps packages"
+  },
   "volta": {
     "node": "24.1.0",
     "pnpm": "10.11.0"

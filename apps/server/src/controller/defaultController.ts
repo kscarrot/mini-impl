@@ -1,5 +1,6 @@
 import type { Context, Next } from 'koa'
 import type { TLSSocket } from 'node:tls'
+import { Debug } from '../obs/index.ts'
 import { Controller, Get } from '../router/decorators.ts'
 
 @Controller('/api')
@@ -15,10 +16,15 @@ export class DefaultController {
     await next()
   }
 
-  // 参数处理器
+  @Debug({
+    breakpointOnEnter: true,
+    when(args) {
+      const ctx = args[0] as Context
+      return ctx.query?.debug === '1'
+    },
+  })
   @Get('/:param')
   async param(ctx: Context, next: Next): Promise<void> {
-    console.log('路径:', ctx.path, '参数:', ctx.params)
     ctx.body = {
       message: `RouterHander Path:${ctx.path}`,
       timestamp: new Date().toISOString(),

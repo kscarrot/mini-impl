@@ -1,41 +1,14 @@
-import type { HTTPMethod } from 'find-my-way'
-import type { Context, Next } from 'koa'
-import type { TLSSocket } from 'node:tls'
+import type { RouterConfig } from './registry.ts'
+import { DefaultController } from '../controller/defaultController.ts'
 import { MessageController } from '../controller/messageController.ts'
 import { SSEController } from '../controller/sseController.ts'
+import { collectRoutesFromControllers } from './registry.ts'
 
-export interface RouterConfig {
-  method: HTTPMethod
-  path: string
-  handler: (ctx: Context, next: Next) => Promise<void>
-}
+export type { RouterConfig }
 
-// 默认处理器
-export async function defaultHandler(ctx: Context, next: Next) {
-  ctx.body = {
-    message: `RouterHander Path:${ctx.path}`,
-    timestamp: new Date().toISOString(),
-    protocol: (ctx.req.socket as TLSSocket).alpnProtocol || 'http/1.1',
-  }
-  await next()
-}
-
-// 参数处理器
-export async function paramHandler(ctx: Context, next: Next) {
-  console.log('路径:', ctx.path, '参数:', ctx.params)
-  ctx.body = {
-    message: `RouterHander Path:${ctx.path}`,
-    timestamp: new Date().toISOString(),
-    params: ctx.params.param,
-  }
-  return next()
-}
-
-// 路由配置
-export const routerConfigs: RouterConfig[] = [
-  { method: 'GET', path: '/api/hello', handler: defaultHandler },
-  { method: 'GET', path: '/api/:param', handler: paramHandler },
-  { method: 'GET', path: '/api/sse', handler: SSEController.handleSSE },
-  { method: 'POST', path: '/api/send-message', handler: MessageController.sendMessage },
-  { method: 'GET', path: '/api/receive-message', handler: MessageController.receiveMessage },
-]
+// 路由配置（由装饰器元数据收集生成）
+export const routerConfigs: RouterConfig[] = collectRoutesFromControllers([
+  DefaultController,
+  MessageController,
+  SSEController,
+])

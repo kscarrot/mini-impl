@@ -1,23 +1,26 @@
 import type { Context, Next } from 'koa'
+import { Controller, Get, Post } from '../router/decorators.ts'
 
 // 全局变量，用于存储当前活跃的SSE连接
 let currentSSEConnection: { res: any, req: any } | null = null
 
+// 设置当前SSE连接
+function setCurrentSSEConnection(res: any, req: any) {
+  currentSSEConnection = { res, req }
+  console.log('新的消息接收连接已建立')
+}
+
+// 清除当前SSE连接
+function clearCurrentSSEConnection() {
+  currentSSEConnection = null
+  console.log('消息接收连接已清除')
+}
+
+@Controller('/api')
 export class MessageController {
-  // 设置当前SSE连接
-  static setCurrentSSEConnection(res: any, req: any) {
-    currentSSEConnection = { res, req }
-    console.log('新的消息接收连接已建立')
-  }
-
-  // 清除当前SSE连接
-  static clearCurrentSSEConnection() {
-    currentSSEConnection = null
-    console.log('消息接收连接已清除')
-  }
-
   // 发送消息到当前活跃的SSE连接
-  static async sendMessage(ctx: Context, _: Next): Promise<void> {
+  @Post('/send-message')
+  async sendMessage(ctx: Context, _: Next): Promise<void> {
     try {
       const { message } = ctx.request.body as { message?: string }
 
@@ -80,7 +83,8 @@ export class MessageController {
   }
 
   // 处理接收消息的SSE连接
-  static async receiveMessage(ctx: Context, _: Next): Promise<void> {
+  @Get('/receive-message')
+  async receiveMessage(ctx: Context, _: Next): Promise<void> {
     console.log('消息接收连接已建立')
 
     // 设置SSE响应头
@@ -108,18 +112,18 @@ export class MessageController {
     res.write(connectSSE)
 
     // 注册为当前活跃的SSE连接
-    MessageController.setCurrentSSEConnection(res, req)
+    setCurrentSSEConnection(res, req)
 
     // 处理连接关闭
     req.on('close', () => {
       console.log('消息接收连接已关闭')
-      MessageController.clearCurrentSSEConnection()
+      clearCurrentSSEConnection()
     })
 
     // 处理连接错误
     req.on('error', (error) => {
       console.error('消息接收连接错误:', error)
-      MessageController.clearCurrentSSEConnection()
+      clearCurrentSSEConnection()
     })
   }
 }

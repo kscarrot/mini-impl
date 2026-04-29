@@ -14,7 +14,7 @@
   ],
   "main": "src/index.ts",
   "scripts": {
-    "dev": "node --watch --experimental-strip-types src/index.ts",
+    "dev": "tsx watch src/index.ts",
     "cert:generate": "mkdir -p certificates && mkcert -key-file certificates/localhost-key.pem -cert-file certificates/localhost.pem localhost 127.0.0.1 ::1"
   },
   "volta": {
@@ -33,6 +33,7 @@
     "@types/koa-static": "^4.0.4",
     "@types/node": "^22.15.21",
     "@types/ws": "^8.5.10",
+    "tsx": "^4.19.4",
     "typescript": "^6.0.3"
   }
 }

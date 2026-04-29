@@ -1,13 +1,16 @@
 import type { Context, Next } from 'koa'
+import { Controller, Get } from '../router/decorators.ts'
 
 /**
  * SSE Controller
  */
+@Controller('/api')
 export class SSEController {
   /**
    * 处理 SSE 连接
    */
-  static async handleSSE(ctx: Context, _: Next): Promise<void> {
+  @Get('/sse')
+  async handleSSE(ctx: Context, _: Next): Promise<void> {
     console.log('SSE connection established')
 
     ctx.set({

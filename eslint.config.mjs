@@ -8,5 +8,6 @@ export default antfu({
   ignores: ['**/dist/**', '**/coverage/**', '**/node_modules/**'],
   rules: {
     'no-console': 'off',
+    'ts/no-redeclare': 'off',
   },
 })

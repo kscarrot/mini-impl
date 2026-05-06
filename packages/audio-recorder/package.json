@@ -1,0 +1,22 @@
+{
+  "name": "@mini-impl/audio-recorder",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "pnpm@10.11.0",
+  "description": "Browser AudioRecorder via AudioWorklet (16kHz WAV)",
+  "author": "ks",
+  "license": "ISC",
+  "keywords": ["audio", "recorder", "worklet"],
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "volta": {
+    "extends": "../../package.json"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3"
+  }
+}

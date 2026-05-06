@@ -15,6 +15,9 @@ const Home: FC = () => {
         <Link to="/vue2-login" style={{ marginRight: '15px' }}>
           vue2-login
         </Link>
+        <Link to="/audio-asr" style={{ marginRight: '15px' }}>
+          语音识别
+        </Link>
       </nav>
       <Outlet />
     </>

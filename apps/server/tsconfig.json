@@ -7,7 +7,7 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "typeRoots": ["../../types", "./node_modules/@types", "./src/types"],
     "types": ["node"],
     "allowImportingTsExtensions": true,
     "strict": true,

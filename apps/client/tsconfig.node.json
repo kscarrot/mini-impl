@@ -8,6 +8,8 @@
 
     /* Bundler mode */
     "moduleResolution": "bundler",
+    "typeRoots": ["../../types", "../../node_modules/@types"],
+    "types": ["node", "global"],
 
     /* Linting */
     "strict": true,
